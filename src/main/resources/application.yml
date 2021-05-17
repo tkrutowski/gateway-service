@@ -1,0 +1,14 @@
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: taskcalendar
+          uri: http://localhost:8080/
+          predicates:
+            - Path=/api/taskcalendar/**
+        - id: teams
+          uri: http://localhost:8082/
+          predicates:
+            - Path=/api/teams/**
+
