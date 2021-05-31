@@ -4,11 +4,21 @@ spring:
     gateway:
       routes:
         - id: taskcalendar
-          uri: http://localhost:8080/
+          uri: lb://TASK-CALENDAR-SERVICE
+#          uri: lb://localhost:8088/
           predicates:
             - Path=/api/taskcalendar/**
         - id: teams
-          uri: http://localhost:8082/
+#          uri: lb://localhost:8082/
+          uri: lb://EMPLOYEE-SERVICE
           predicates:
             - Path=/api/teams/**
 
+      globalcors:
+        corsConfigurations:
+         '[/**]':
+           allowedOrigins: "*"
+           allowedMethods:
+              - GET
+              - POST
+              - PUT
