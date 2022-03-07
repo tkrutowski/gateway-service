@@ -1,24 +1,42 @@
-
 spring:
   cloud:
     gateway:
       routes:
         - id: taskcalendar
-          uri: lb://TASK-CALENDAR-SERVICE
-#          uri: lb://localhost:8088/
+          uri: lb://TASKCALENDAR-SERVICE
+          #          uri: lb://localhost:8088/
           predicates:
             - Path=/api/taskcalendar/**
-        - id: teams
-#          uri: lb://localhost:8082/
+        - id: employee
+          #          uri: lb://localhost:8082/
           uri: lb://EMPLOYEE-SERVICE
           predicates:
-            - Path=/api/teams/**
+            - Path=/api/employee/**, /api/teams/**
+#            - Path=/api/teams/**
 
       globalcors:
         corsConfigurations:
-         '[/**]':
-           allowedOrigins: "*"
-           allowedMethods:
+          '[/**]':
+            #           allowedOrigins: "*"
+            allowedOrigins: "https://progasoffice.netlify.app"
+            allowedHeaders:
+              - content-type
+            allowedMethods:
               - GET
               - POST
               - PUT
+
+
+#
+#      default-filters:
+#        - name: Retry
+#          args:
+#            retries: 3
+#            metchods: GET
+#            series: SERVER_ERROR
+#            #            exceptions: java.io.IOException  - można wybrać wyjątki
+#            backoff:
+#              firstBackoff: 50ms
+#              maxBackOff: 500ms
+#              factor: 2
+#              basedOnPreviousValue: false
