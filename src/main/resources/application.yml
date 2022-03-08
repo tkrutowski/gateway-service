@@ -12,12 +12,12 @@ spring:
           uri: lb://EMPLOYEE-SERVICE
           predicates:
             - Path=/api/employee/**, /api/teams/**
-#            - Path=/api/teams/**
+      #            - Path=/api/teams/**
 
       globalcors:
         corsConfigurations:
           '[/**]':
-            #           allowedOrigins: "*"
+            #            allowedOrigins: "*"
             allowedOrigins: "https://progasoffice.netlify.app"
             allowedHeaders:
               - content-type
